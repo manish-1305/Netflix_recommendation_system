@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix Recommendation System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: url('https://dnm.nflximg.net/api/v6/BvVbc2Wxr2w6QuoANoSpJKEIWjQ/AAAAQdHbjrX0uL1mH7uUW7VZ-p5GJOSNNRko_9A_12Mlv5wVYQIDy4nuupxLHxkDj9V0e1OLBs_s8ZlxFkyhPlK5XkrlTK0c7yP42LLinQdYhz8lqfgUcOH68JAbEcY45jG02gCI1NyKVf1lqxsQFmcNN5szbv8.jpg?r=aee') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+    input:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5);
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center justify-center h-screen bg-black bg-opacity-50">
+  <div class="text-center text-white mb-auto">
+    <h1 class="text-4xl font-bold mb-4">Netflix Recommendation System</h1>
+    <h2 class="text-2xl mb-8">Content Based Filtering</h2>
+    <form method="post" class="flex flex-col items-center">
+      <input 
+        type="text" 
+        name="movie_name"
+        placeholder="Enter the movie name" 
+        class="w-80 px-4 py-2 border-2 border-red-600 rounded-md text-black mb-4" 
+      />
+      <button type="submit" class="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">Get Result</button>
+    </form>
+    {% if recommendations %}
+    <div class="mt-8 text-white">
+      <h3 class="text-xl font-semibold mb-4">Recommendations for "{{ movie_name }}":</h3>
+      <div class="overflow-x-auto">
+        <table class="min-w-full bg-gray-800 rounded-md">
+          <thead>
+            <tr>
+              <th class="px-4 py-2">Title</th>
+              <th class="px-4 py-2">Type</th>
+              <th class="px-4 py-2">Listed In</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for rec in recommendations %}
+            <tr class="border-t border-gray-700">
+              <td class="px-4 py-2">{{ rec.title }}</td>
+              <td class="px-4 py-2">{{ rec.type }}</td>
+              <td class="px-4 py-2">{{ rec.listed_in }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  <footer class="text-white mt-auto pb-4 text-center">
+    Manish Sagar
+  </footer>
+</body>
+</html>
